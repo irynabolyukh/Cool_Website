@@ -65,3 +65,86 @@ textarea{
 .myBtn:hover {
     background-color: #6D230D;
 }
+
+.form-application{
+    padding: 30px 40px;
+}
+
+.my-form-control{
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.my-form-control label{
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 5px;
+    font-size: 22px;
+}
+
+.my-form-control input{
+    display: block;
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+}
+
+.my-form-control textarea{
+    display: block;
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+}
+
+.my-form-control.success input{
+    border-color: #2d9b05;
+}
+
+.my-form-control.error input{
+    border-color: #8d1014;
+}
+
+.my-form-control.success textarea{
+    border-color: #2d9b05;
+}
+
+.my-form-control.error textarea{
+    border-color: #8d1014;
+}
+
+.my-form-control i{
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    visibility: hidden;
+}
+
+.my-form-control.success i.fa-check-circle{
+    visibility: visible;
+    color: #2d9b05;
+}
+
+.my-form-control.error i.fa-exclamation-circle{
+    visibility: visible;
+    color: #8d1014;
+}
+
+.my-form-control small{
+    font-weight: bold;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    visibility: hidden;
+}
+
+.my-form-control.error small{
+    visibility: visible;
+    color: #8d1014;
+}
+
+.my-button{
+    font-size: 22px;
+}
