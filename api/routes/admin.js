@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 
 const config = require('config');
-// const title = process.env.App.title;
 const title = config.get('App.title');
 const domain = config.get('App.domain');
 const color = config.get('App.color');

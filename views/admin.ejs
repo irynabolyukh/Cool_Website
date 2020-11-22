@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title><%= title %></title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://kit.fontawesome.com/3c3246e51c.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
-    <link href="/assets/style.css" rel="stylesheet" type="text/css">
-</head>
 <body style="background-color: <%= color %>">
     <button class="myBtn" onClick='window.location="#training"'>Add Training</button>
     <button class="myBtn" onClick='window.location="#trainings"'>Trainings</button>
-    <button class="myBtn" onClick='window.location="#mailer"'>Add Application</button>
+    <button class="myBtn" onClick='window.location="#application"'>Add Application</button>
     <button class="myBtn" onClick='window.location="#table"'>Applications</button>
 
     <div id="training" class="container shadow-lg p-3 mb-5 bg-white rounded">
@@ -81,7 +71,7 @@
             </table>
         </div>
 
-    <div id="mailer" class="container shadow-lg p-3 mb-5 bg-white rounded">
+    <div id="application" class="container shadow-lg p-3 mb-5 bg-white rounded">
         <h1>Add New Application:</h1>
         <form id="formApplication" class="form-application" method="POST" onsubmit="return checkInput();">
             <div class="my-form-control">
@@ -272,4 +262,3 @@
     }
 </script>
 </body>
-</html>

@@ -1,9 +1,12 @@
 const express = require('express');
+const expressLayouts = require('express-ejs-layouts');
 const app = express();
 const morgan = require('morgan'); //logging tool for HTTP servers
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
+const config = require('config');
+const title = config.get('App.title');
 
 const adminRoutes = require('./api/routes/admin');
 
@@ -12,6 +15,8 @@ mongoose.connect('mongodb+srv://node-mailer:' + process.env.MONGO_ATLAS_PW + '@n
         useUnifiedTopology: true }
 );
 
+app.use(expressLayouts);
+app.set('layout', './layouts/admin-layout');
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')));
@@ -29,6 +34,27 @@ app.use((req, res, next) => {
         return res.status(200).json({});
     }
     next();
+});
+
+app.use('/home', (req, res) => {
+    res.render('home', {
+        layout: './layouts/regular-layout',
+        title: title
+    });
+});
+
+app.use('/about', (req, res) => {
+    res.render('about', {
+        layout: './layouts/regular-layout',
+        title: title
+    });
+});
+
+app.use('/trainings', (req, res) => {
+    res.render('trainings', {
+        layout: './layouts/regular-layout',
+        title: title
+    });
 });
 
 app.use('/admin', adminRoutes);
