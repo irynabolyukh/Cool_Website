@@ -2,7 +2,7 @@
   "App" : {
     "title" : "Круті тренінги",
     "domain": "cooltraining.com.ua",
-    "color": "#ffddfd",
+    "color": "#17624D",
     "webServer" : {
       "protocol" : "http",
       "port" : 3000

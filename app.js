@@ -7,6 +7,8 @@ const mongoose = require('mongoose');
 const path = require('path');
 const config = require('config');
 const title = config.get('App.title');
+const color = config.get('App.color');
+const domain = config.get('App.domain');
 
 const adminRoutes = require('./api/routes/admin');
 
@@ -36,24 +38,26 @@ app.use((req, res, next) => {
     next();
 });
 
+let pages = [{"name": "HOME", "href": "/home"}, {"name": "TRAININGS", "href": "/trainings"}, {"name": "ABOUT", "href": "/about"}];
+
 app.use('/home', (req, res) => {
     res.render('home', {
         layout: './layouts/regular-layout',
-        title: title
+        title: title, color: color, pages: pages, domain: domain
     });
 });
 
 app.use('/about', (req, res) => {
     res.render('about', {
         layout: './layouts/regular-layout',
-        title: title
+        title: title, color: color, pages: pages, domain: domain
     });
 });
 
 app.use('/trainings', (req, res) => {
     res.render('trainings', {
         layout: './layouts/regular-layout',
-        title: title
+        title: title, color: color, pages: pages, domain: domain
     });
 });
 

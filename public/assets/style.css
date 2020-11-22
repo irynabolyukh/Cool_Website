@@ -1,9 +1,58 @@
 body{
     background-color: #f8d4db;
+    font-size: 20px;
+}
+
+h1{
+    color: #17624D;
+    font-size: 46px;
+}
+
+img{
+    width: 95%;
+}
+
+.apply-header{
+    text-align: center;
+    background-color: #17624D;
+    color: #ffffff;
+    padding: 10px 0;
+}
+
+a {
+    color: #ffffff;
+}
+
+a:hover {
+    color: #ffffff;
+}
+
+.navbar-brand{
+    font-size: 28px;
+}
+
+.navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.hov{
+    color: #c4bdbd;
+    font-size: 22px;
+}
+
+.grey{
+    background-color: #bebebe;
+    border-radius: 5px;
 }
 
 .form-application{
-    padding: 30px 40px;
+    padding: 30px 20px;
+}
+
+#application{
+    border: 5px solid #17624D;
 }
 
 .my-form-control{
@@ -81,6 +130,13 @@ body{
     color: #8d1014;
 }
 
-.my-button{
-    font-size: 22px;
+.my-button button{
+    font-size: 24px;
+    background-color: #17624D;
+}
+
+.layout-sidebar{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    padding: 20px;
 }
