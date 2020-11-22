@@ -1,0 +1,9 @@
+{
+  "App" : {
+    "title" : "Cool Website",
+    "webServer" : {
+      "protocol" : "http",
+      "port" : 3000
+    }
+  }
+}

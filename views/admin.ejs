@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Mailer</title>
+    <title><%= title %></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
     <link href="/assets/style.css" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body style="background-color: <%= color %>">
+<!--    <div class="container"><%= domain %></div>-->
     <button class="myBtn" onClick='window.location="#message"'>Message</button>
-    <button class="myBtn" onClick='window.location="#mailer"'>Add Mailer</button>
-    <button class="myBtn" onClick='window.location="#table"'>All Mailers</button>
+    <button class="myBtn" onClick='window.location="#training"'>Add Training</button>
+    <button class="myBtn" onClick='window.location="#mailer"'>Add Application</button>
+    <button class="myBtn" onClick='window.location="#table"'>Applications</button>
 
     <div id="message" class="container shadow-lg p-3 mb-5 bg-white rounded">
         <h1>Create Message:</h1>
-        <form action="/mailers/send" method="POST">
+        <form action="/admin/send" method="POST">
                 <div class="form-group">
                     <label for="template">Choose template:</label>
                     <select id="template" name="messageTemplate" class="form-control-lg">
@@ -30,13 +32,33 @@
                     <textarea class="form-control-lg" id="message" rows="3" cols="41" placeholder="Message" name="myMessage"></textarea>
                 </div>
             <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-success btn-lg">Send message to Mailers</button>
+                <button type="submit" class="btn btn-success btn-lg">Send message to Applicators</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="training" class="container shadow-lg p-3 mb-5 bg-white rounded">
+        <h1>Add New Training:</h1>
+        <form action="/admin/training" method="POST">
+            <div class="row">
+                <div class="col d-flex justify-content-end">
+                    <input type="text" required placeholder="name Training" name="nameT" class="form-control-lg">
+                </div>
+                <div class="col d-flex justify-content-center">
+                    <textarea type="text" required placeholder="descrShort" name="descrShort" class="form-control-lg"></textarea>
+                </div>
+                <div class="col d-flex justify-content-start">
+                    <textarea type="text" required placeholder="descrLong" name="descrLong" class="form-control-lg"></textarea>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-success btn-lg">Add Training</button>
             </div>
         </form>
     </div>
 
     <div id="mailer" class="container shadow-lg p-3 mb-5 bg-white rounded">
-        <h1>Add New Mailer:</h1>
+        <h1>Add New Application:</h1>
         <form method="POST" onsubmit="return validate()">
             <div class="row">
                 <div class="col d-flex justify-content-end">
@@ -48,49 +70,57 @@
             </div>
             <div class="row">
                 <div class="col d-flex justify-content-end">
-                    <input type="text" required placeholder="Middle Name" name="midName" class="form-control-lg">
+                    <input id="emailField" type="email" required placeholder="E-mail" name="mail" class="form-control-lg">
                 </div>
                 <div class="col d-flex justify-content-start">
-                    <input id="emailField" type="email" required placeholder="E-mail" name="mail" class="form-control-lg">
+                    <input type="text" required placeholder="Phone" name="phoneNum" class="form-control-lg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <textarea type="text" required placeholder="Text" name="applicText" class="form-control-lg"></textarea>
                 </div>
             </div>
             <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-success btn-lg">Add Mailer</button>
+                <button type="submit" class="btn btn-success btn-lg">Apply</button>
             </div>
         </form>
     </div>
 
     <div id="table" class="container shadow-lg p-3 mb-5 bg-white rounded">
-        <h1>Mailers</h1>
+        <h1>Applications</h1>
         <table class="table table-striped table-hover table-bordered">
             <thead class="thead-dark">
             <tr>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Middle Name</th>
                 <th>E-mail</th>
+                <th>Phone</th>
+                <th>Text</th>
                 <th>Delete</th>
                 <th>Update</th>
             </tr>
             </thead>
             <tbody>
-            <% mailers.forEach(function (mailer) {%>
+            <% applications.forEach(function (mailer) {%>
                 <tr>
                     <td class="align-middle"><%= mailer.firstName %></td>
                     <td class="align-middle"><%= mailer.surname %></td>
-                    <td class="align-middle"><%= mailer.midName %></td>
                     <td class="table-info font-italic align-middle"><%= mailer.mail %></td>
+                    <td class="align-middle"><%= mailer.phoneNum %></td>
+                    <td class="align-middle"><%= mailer.applicText %></td>
                     <td class="align-middle">
-                        <form action="/mailers/delete/<%= mailer._id %>" method="post">
+                        <form action="/admin/delete/<%= mailer._id %>" method="post">
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </td>
                     <td>
-                        <form action="/mailers/update/<%= mailer._id %>" method="POST" onsubmit="return validate()">
+                        <form action="/admin/update/<%= mailer._id %>" method="POST" onsubmit="return validate()">
                             <input type="text" placeholder="First Name" name="firstName">
                             <input type="text" placeholder="Surname" name="surname">
-                            <input type="text" placeholder="Middle Name" name="midName">
                             <input type="email" id="emailField" placeholder="E-mail" name="mail">
+                            <input type="text" placeholder="Phone" name="phoneNum">
+                            <textarea type="text" placeholder="Text" name="applicText"></textarea>
                             <button type="submit" class="btn btn-info">Update</button>
                         </form>
                     </td>
