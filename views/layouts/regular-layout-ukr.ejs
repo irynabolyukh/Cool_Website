@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%- title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://kit.fontawesome.com/3c3246e51c.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+    <link href="/assets/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<nav class="navbar" style="background-color: <%- color%>;">
+    <a href="#" class="navbar-brand"><%= domain %> | </a>
+    <% for(let page of pages) { %>
+        <a class="hov nav-item nav-link" href="<%= page.href %>"><%= page.name %></a>
+    <% } %>
+    <a class="en nav-item nav-link" href="">ENG</a>
+    <a class="ukr nav-item nav-link" href="">UKR</a>
+</nav>
+
+<div class="layout-sidebar">
+    <main><%- body %></main>
+    <side><%- include('../partials/application-form-uk.ejs') %></side>
+</div>
+</body>
+</html>

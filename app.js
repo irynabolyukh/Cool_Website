@@ -39,11 +39,19 @@ app.use((req, res, next) => {
 });
 
 let pages = [{"name": "HOME", "href": "/home"}, {"name": "TRAININGS", "href": "/trainings"}, {"name": "ABOUT", "href": "/about"}];
+let pagesUkr = [{"name": "ГОЛОВНА", "href": "/home-ukr"}, {"name": "ТРЕНІНГИ", "href": "/trainings-ukr"}, {"name": "ПРО НАС", "href": "/about-ukr"}];
 
 app.use('/home', (req, res) => {
     res.render('home', {
         layout: './layouts/regular-layout',
         title: title, color: color, pages: pages, domain: domain
+    });
+});
+
+app.use('/home-ukr', (req, res) => {
+    res.render('home-ukr', {
+        layout: './layouts/regular-layout-ukr',
+        title: title, color: color, pages: pagesUkr, domain: domain
     });
 });
 
@@ -54,10 +62,24 @@ app.use('/about', (req, res) => {
     });
 });
 
+app.use('/about-ukr', (req, res) => {
+    res.render('about-ukr', {
+        layout: './layouts/regular-layout-ukr',
+        title: title, color: color, pages: pagesUkr, domain: domain
+    });
+});
+
 app.use('/trainings', (req, res) => {
     res.render('trainings', {
         layout: './layouts/regular-layout',
         title: title, color: color, pages: pages, domain: domain
+    });
+});
+
+app.use('/trainings-ukr', (req, res) => {
+    res.render('trainings-ukr', {
+        layout: './layouts/regular-layout-ukr',
+        title: title, color: color, pages: pagesUkr, domain: domain
     });
 });
 

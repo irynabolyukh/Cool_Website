@@ -37,6 +37,16 @@ a:hover {
     justify-content: flex-start;
 }
 
+.en{
+    padding-left: 30%;
+}
+
+@media (max-width: 720px) {
+    .en{
+        padding-left: 0;
+    }
+}
+
 .hov{
     color: #c4bdbd;
     font-size: 22px;
