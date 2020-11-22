@@ -52,6 +52,16 @@ textarea{
     left: 30px;
 }
 
+.myBtn:nth-child(4) {
+    top: 240px;
+    left: 30px;
+}
+
+.myBtn:nth-child(5) {
+    top: 310px;
+    left: 30px;
+}
+
 .myBtn:hover {
     background-color: #6D230D;
 }

@@ -1,6 +1,8 @@
 {
   "App" : {
-    "title" : "Cool Website",
+    "title" : "Круті тренінги",
+    "domain": "cooltraining.com.ua",
+    "color": "#ffddfd",
     "webServer" : {
       "protocol" : "http",
       "port" : 3000

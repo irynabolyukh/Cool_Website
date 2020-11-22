@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 
-const bookSchema = mongoose.Schema({
+const trainingSchema = mongoose.Schema({
     _id: mongoose.SchemaTypes.ObjectId,
-    nameB: {type: String, required: true},
-    authorB: {type: String, required: true}
+    nameT: {type: String, required: true},
+    descrShort: {type: String, required: true},
+    descrLong: {type: String, required: true}
 });
 
-module.exports = mongoose.model('Book', bookSchema);
+module.exports = mongoose.model('Training', trainingSchema);

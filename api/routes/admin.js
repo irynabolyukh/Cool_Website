@@ -36,7 +36,7 @@ router.use('/send', function (req, res, next){
                 console.log('Email sent: ' + info.response);
             }
         });
-        res.redirect('/mailers');
+        res.redirect('/admin');
     }).catch(err => {
         console.log(err);
         res.status(500).json({
@@ -49,11 +49,19 @@ router.use('/send', function (req, res, next){
 router.get('/', (req,res,next) => {
     Application.find().exec().then(docs => {
         console.log(docs);
-        res.status(200).render('index.ejs', {
-            mailers: docs,
-            title: title,
-            domain: domain,
-            color: color
+        Training.find().exec().then(data => {
+            res.status(200).render('admin.ejs', {
+                applications: docs,
+                trainings: data,
+                title: title,
+                domain: domain,
+                color: color
+            });
+        }).catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
         });
     }).catch(err => {
         console.log(err);
@@ -75,7 +83,7 @@ router.post('/', (req,res,next) => {
 
     application.save().then(result => {
         console.log(result);
-        res.status(201).redirect('/mailers');
+        res.status(201).redirect('/admin');
     }).catch(err => {
         console.log(err);
         res.status(500).json({
@@ -94,7 +102,7 @@ router.post('/training', (req,res,next) => {
 
     training.save().then(result => {
         console.log(result);
-        res.status(201).redirect('/mailers');
+        res.status(201).redirect('/admin');
     }).catch(err => {
         console.log(err);
         res.status(500).json({
@@ -111,7 +119,7 @@ router.get('/:applicId', (req,res,next) => {
             res.status(200).json(doc);
         }else{
             res.status(404).json({
-                message: "No mailer found for provided ID"
+                message: "No applicator found for provided ID"
             });
         }
     }).catch(err => {
@@ -133,7 +141,7 @@ router.post('/update/:applicId', (req,res,next) => {
     Application.update({ _id: id }, { $set: updateOps })
         .exec().then(result => {
             console.log(result);
-            res.status(200).redirect('/mailers');
+            res.status(200).redirect('/admin');
     }).catch(err => {
         console.log(err);
         res.status(500).json({
@@ -147,7 +155,60 @@ router.post('/delete/:applicId', (req,res,next) => {
     Application.remove({
        _id: id
     }).exec().then(result => {
-        res.status(200).redirect('/mailers');
+        res.status(200).redirect('/admin');
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        })
+    });
+});
+
+router.get('/training/:trainingId', (req,res,next) => {
+    const id = req.params.trainingId;
+    Training.findById(id).select('nameT descrShort _id').exec().then(doc => {
+        console.log(doc);
+        if(doc){
+            res.status(200).json(doc);
+        }else{
+            res.status(404).json({
+                message: "No training found for provided ID"
+            });
+        }
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    });
+});
+
+router.post('/update/training/:trainingId', (req,res,next) => {
+    const id = req.params.trainingId;
+    const updateOps = {};
+    for (const [key, value] of Object.entries(req.body)) {
+        if(value !== ''){
+            updateOps[key] = value;
+        }
+    }
+    Training.update({ _id: id }, { $set: updateOps })
+        .exec().then(result => {
+        console.log(result);
+        res.status(200).redirect('/admin');
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    });
+});
+
+router.post('/delete/training/:trainingId', (req,res,next) => {
+    const id = req.params.trainingId
+    Training.remove({
+        _id: id
+    }).exec().then(result => {
+        res.status(200).redirect('/admin');
     }).catch(err => {
         console.log(err);
         res.status(500).json({

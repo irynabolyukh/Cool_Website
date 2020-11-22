@@ -8,9 +8,9 @@
     <link href="/assets/style.css" rel="stylesheet" type="text/css">
 </head>
 <body style="background-color: <%= color %>">
-<!--    <div class="container"><%= domain %></div>-->
     <button class="myBtn" onClick='window.location="#message"'>Message</button>
     <button class="myBtn" onClick='window.location="#training"'>Add Training</button>
+    <button class="myBtn" onClick='window.location="#trainings"'>Trainings</button>
     <button class="myBtn" onClick='window.location="#mailer"'>Add Application</button>
     <button class="myBtn" onClick='window.location="#table"'>Applications</button>
 
@@ -57,6 +57,43 @@
         </form>
     </div>
 
+        <div id="trainings" class="container shadow-lg p-3 mb-5 bg-white rounded">
+            <h1>Trainings</h1>
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Short Description</th>
+                    <th>Long Description</th>
+                    <th>Delete</th>
+                    <th>Update</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% trainings.forEach(function (training) {%>
+                    <tr>
+                        <td class="align-middle"><%= training.nameT %></td>
+                        <td class="align-middle"><%= training.descrShort %></td>
+                        <td class="align-middle"><%= training.descrLong %></td>
+                        <td class="align-middle">
+                            <form action="/admin/delete/training/<%= training._id %>" method="post">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/admin/update/training/<%= training._id %>" method="POST" onsubmit="return validate()">
+                                <div class="row-cols-lg-1"><input type="text" placeholder="name Training" name="nameT"></div>
+                                <div class="row-cols-lg-1"><textarea type="text" placeholder="Text" name="descrShort"></textarea></div>
+                                <div class="row-cols-lg-1"><textarea type="text" placeholder="Text" name="descrLong"></textarea></div>
+                                <button type="submit" class="btn btn-info">Update</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+                </tbody>
+            </table>
+        </div>
+
     <div id="mailer" class="container shadow-lg p-3 mb-5 bg-white rounded">
         <h1>Add New Application:</h1>
         <form method="POST" onsubmit="return validate()">
@@ -102,20 +139,20 @@
             </tr>
             </thead>
             <tbody>
-            <% applications.forEach(function (mailer) {%>
+            <% applications.forEach(function (application) {%>
                 <tr>
-                    <td class="align-middle"><%= mailer.firstName %></td>
-                    <td class="align-middle"><%= mailer.surname %></td>
-                    <td class="table-info font-italic align-middle"><%= mailer.mail %></td>
-                    <td class="align-middle"><%= mailer.phoneNum %></td>
-                    <td class="align-middle"><%= mailer.applicText %></td>
+                    <td class="align-middle"><%= application.firstName %></td>
+                    <td class="align-middle"><%= application.surname %></td>
+                    <td class="table-info font-italic align-middle"><%= application.mail %></td>
+                    <td class="align-middle"><%= application.phoneNum %></td>
+                    <td class="align-middle"><%= application.applicText %></td>
                     <td class="align-middle">
-                        <form action="/admin/delete/<%= mailer._id %>" method="post">
+                        <form action="/admin/delete/<%= application._id %>" method="post">
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </td>
                     <td>
-                        <form action="/admin/update/<%= mailer._id %>" method="POST" onsubmit="return validate()">
+                        <form action="/admin/update/<%= application._id %>" method="POST" onsubmit="return validate()">
                             <input type="text" placeholder="First Name" name="firstName">
                             <input type="text" placeholder="Surname" name="surname">
                             <input type="email" id="emailField" placeholder="E-mail" name="mail">
