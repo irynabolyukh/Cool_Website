@@ -183,7 +183,7 @@ router.post('/delete/:applicId', (req,res,next) => {
 
 router.get('/training/:trainingId', (req,res,next) => {
     const id = req.params.trainingId;
-    Training.findById(id).select('nameT descrShort _id').exec().then(doc => {
+    Training.findById(id).select('descrLong -_id').exec().then(doc => {
         console.log(doc);
         if(doc){
             res.status(200).json(doc);

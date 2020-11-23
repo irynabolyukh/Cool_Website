@@ -2,42 +2,42 @@
     <h3 class="apply-header">ФОРМА ЗАЯВКИ</h3>
     <form id="formApplication" class="form-application" method="POST" onsubmit="return checkInput();">
         <div class="my-form-control">
-            <label>First name</label>
-            <input type="text" placeholder="Someone" name="firstName" id="firstName">
+            <label>Ваше ім'я</label>
+            <input type="text" placeholder="Василь" name="firstName" id="firstName">
             <i class="fas fa-check-circle"></i>
             <i class="fas fa-exclamation-circle"></i>
             <small>Error message</small>
         </div>
         <div class="my-form-control">
-            <label>Surname</label>
-            <input type="text" placeholder="Someone" name="surname" id="surname">
+            <label>Ваше прізвище</label>
+            <input type="text" placeholder="Петренко" name="surname" id="surname">
             <i class="fas fa-check-circle"></i>
             <i class="fas fa-exclamation-circle"></i>
             <small>Error message</small>
         </div>
         <div class="my-form-control">
-            <label>Email</label>
+            <label>Ваш e-mail</label>
             <input type="email" placeholder="lalala@gmail.com" name="mail" id="mail">
             <i class="fas fa-check-circle"></i>
             <i class="fas fa-exclamation-circle"></i>
             <small>Error message</small>
         </div>
         <div class="my-form-control">
-            <label>Phone</label>
+            <label>Телефон (формат +38(xxx)xxxxxxx)</label>
             <input type="text" placeholder="+38(xxx)xxxxxxx" name="phoneNum" id="phoneNum">
             <i class="fas fa-check-circle"></i>
             <i class="fas fa-exclamation-circle"></i>
             <small>Error message</small>
         </div>
         <div class="my-form-control">
-            <label>Text</label>
-            <textarea type="text" placeholder="Text" name="applicText" id="applicText"></textarea>
+            <label>Текст заявки</label>
+            <textarea type="text" placeholder="Текст..." name="applicText" id="applicText"></textarea>
             <i class="fas fa-check-circle"></i>
             <i class="fas fa-exclamation-circle"></i>
             <small>Error message</small>
         </div>
         <div class="my-button">
-            <button type="submit" class="btn btn-success btn-lg btn-block">Apply</button>
+            <button type="submit" class="btn btn-success btn-lg btn-block">Подати заявку</button>
         </div>
     </form>
 </div>
@@ -58,41 +58,41 @@
         let isGood = true;
 
         if(firstnameValue === ''){
-            setErrorFor(firstName, "First name cannot be blank");
+            setErrorFor(firstName, "Поле з іменем не повинне бути пустим");
             isGood = false;
         }else{
             setSuccessFor(firstName);
         }
 
         if(surnameValue === ''){
-            setErrorFor(surname, "Surname cannot be blank");
+            setErrorFor(surname, "Поле з прізвищем не повинне бути пустим");
             isGood = false;
         }else{
             setSuccessFor(surname);
         }
 
         if(mailValue === '') {
-            setErrorFor(mail, 'Email cannot be blank');
+            setErrorFor(mail, 'Поле з поштою не повинне бути пустим');
             isGood = false;
         } else if (!isEmail(mailValue)) {
-            setErrorFor(mail, 'Not a valid email');
+            setErrorFor(mail, 'Введена пошта є некоректною');
             isGood = false;
         } else {
             setSuccessFor(mail);
         }
 
         if(phoneNumValue === ''){
-            setErrorFor(phoneNum, "Phone cannot be blank");
+            setErrorFor(phoneNum, "Поле з телефоном не повинне бути пустим");
             isGood = false;
         }else if (!isPhone(phoneNumValue)) {
-            setErrorFor(phoneNum, 'Not a valid phone number');
+            setErrorFor(phoneNum, 'Неправильний формат телефону');
             isGood = false;
         }else{
             setSuccessFor(phoneNum);
         }
 
         if(applicTextValue === '') {
-            setErrorFor(applicText, 'Text cannot be blank');
+            setErrorFor(applicText, 'Текст заявки не може бути пустим');
             isGood = false;
         } else {
             setSuccessFor(applicText);

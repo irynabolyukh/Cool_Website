@@ -8,6 +8,10 @@ h1{
     font-size: 46px;
 }
 
+h2{
+    color: #17624D;
+}
+
 img{
     width: 95%;
 }
@@ -37,13 +41,32 @@ a:hover {
     justify-content: flex-start;
 }
 
-.en{
-    padding-left: 30%;
+#showMore{
+    margin-bottom: 50px;
+    color: #1a71ca;
+}
+
+#showMore:hover{
+    margin-bottom: 50px;
+    color: #0a194f;
+    cursor: pointer;
 }
 
 @media (max-width: 720px) {
     .en{
         padding-left: 0;
+    }
+}
+
+@media (min-width: 721px) {
+    .en{
+        padding-left: 30%;
+    }
+}
+
+@media (min-width: 988px) {
+    .en{
+        padding-left: 50%;
     }
 }
 

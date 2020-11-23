@@ -1,4 +1,76 @@
-<div id="trainingsShow"></div>
+<script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
+
+<div class="d-flex align-items-center" id="root">
+    <div class="container">
+        <div id="trainingsShow" class="container overflow-auto"></div>
+    </div>
+</div>
+
+<script type="text/babel">
+    class ShowTrainings extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                trainings: [],
+                trainingsFull: false
+            };
+            this.hideComponent = this.hideComponent.bind(this);
+        }
+        hideComponent(name) {
+            switch (name) {
+                case "trainingsFull":
+                    this.setState({ trainingsFull: !this.state.trainingsFull });
+                    break;
+                default:
+                    null;
+            }
+        }
+        getNewTrainings() {
+            fetch("/admin/trainings")
+                .then((resp) => resp.json())
+                .then((resp) => {
+                    console.log(resp);
+                    this.setState((state) => ({ trainings: resp }));
+                });
+        }
+
+        componentDidMount() {
+            this.getNewTrainings();
+            this.interval = setInterval(() => this.getNewTrainings(), 3000);
+        }
+
+        componentWillUnmount() {
+            clearInterval(this.interval);
+        }
+
+        render() {
+            const { trainingsFull } = this.state;
+            if (this.state.trainings) {
+                return (
+                    <div className="card-body table-responsive">
+                        {this.state.trainings.map((training) => (
+                            <div>
+                                <h2 className="">{training.nameT}</h2>
+                                <p className="">{training.descrShort}</p>
+                                {trainingsFull && (
+                                    <p>{training.descrLong}</p>)
+                                }
+                                <p id="showMore" onClick={() => this.hideComponent("trainingsFull")}>
+                                    Детальніше
+                                </p>
+                            </div>)
+                        )}
+                    </div>
+                );
+            }
+        }
+    }
+    ReactDOM.render(<ShowTrainings></ShowTrainings>, document.getElementById("trainingsShow"));
+
+</script>
+
 <script>
     $(".hov[href='/trainings-ukr']").css('color', '#ffffff');
     $(".en").attr("href","/trainings");
