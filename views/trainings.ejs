@@ -1,4 +1,80 @@
-<div id="trainingsShow"></div>
+
+<script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
+
+
+<div class="d-flex align-items-center" id="root">
+    <div class="container shadow-lg p-3 mt-5 rounded flex-column">
+        <div id="postsClientSide" class="container overflow-auto" style="min-height: 70vh; max-height: 70vh;"></div>
+    </div>
+</div>
+
+<script type="text/babel">
+    class ShowPosts extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                posts: [],
+                // showHideFName: true,
+                // showHideLName: true
+            };
+            // this.hideComponent = this.hideComponent.bind(this);
+        }
+
+        // hideComponent(name) {
+        //     switch (name) {
+        //         case "showHideFName":
+        //             this.setState({ showHideFName: !this.state.showHideFName });
+        //             break;
+        //         case "showHideLName":
+        //             this.setState({ showHideLName: !this.state.showHideLName });
+        //             break;
+        //         default:
+        //             null;
+        //     }
+        // }
+
+        getNewPosts() {
+            fetch("/admin/trainings")
+                .then((resp) => resp.json())
+                .then((resp) => {
+                    console.log(resp);
+                    this.setState((state) => ({ posts: resp }));
+                });
+        }
+
+        componentDidMount() {
+            this.getNewPosts();
+            this.interval = setInterval(() => this.getNewPosts(), 3000);
+        }
+
+        componentWillUnmount() {
+            clearInterval(this.interval);
+        }
+
+        render() {
+            // const { showHideFName, showHideLName } = this.state;
+            if (this.state.posts) {
+                return (
+                    <div className="card-body table-responsive">
+                        {this.state.posts.map((post) => (
+                            <div>
+                                <h2 className="">{post.nameT}</h2>
+                                <p className="">{post.descrShort}</p>
+                                <p>{post.descrLong}</p>
+                                <a href={"http://localhost:3000/admin/training/" + post._id}>More</a>
+                            </div>)
+                        )}
+                    </div>
+                );
+            }
+        }
+    }
+
+    ReactDOM.render(<ShowPosts></ShowPosts>, document.getElementById("postsClientSide"));
+</script>
+
 <script>
     $(".hov[href='/trainings']").css('color', '#ffffff');
     $(".en").attr("href","/trainings");
