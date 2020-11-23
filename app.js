@@ -9,6 +9,7 @@ const config = require('config');
 const title = config.get('App.title');
 const color = config.get('App.color');
 const domain = config.get('App.domain');
+const emailVerify = config.get('App.emailVerify');
 
 const adminRoutes = require('./api/routes/admin');
 
@@ -42,42 +43,42 @@ let pagesUkr = [{"name": "ГОЛОВНА", "href": "/home-ukr"}, {"name": "ТР�
 
 app.use('/home', (req, res) => {
     res.render('home', {
-        layout: './layouts/regular-layout',
+        layout: './layouts/regular-layout', emailVerify: emailVerify,
         title: title, color: color, pages: pages, domain: domain
     });
 });
 
 app.use('/home-ukr', (req, res) => {
     res.render('home-ukr', {
-        layout: './layouts/regular-layout-ukr',
+        layout: './layouts/regular-layout-ukr', emailVerify: emailVerify,
         title: title, color: color, pages: pagesUkr, domain: domain
     });
 });
 
 app.use('/about', (req, res) => {
     res.render('about', {
-        layout: './layouts/regular-layout',
+        layout: './layouts/regular-layout', emailVerify: emailVerify,
         title: title, color: color, pages: pages, domain: domain
     });
 });
 
 app.use('/about-ukr', (req, res) => {
     res.render('about-ukr', {
-        layout: './layouts/regular-layout-ukr',
+        layout: './layouts/regular-layout-ukr', emailVerify: emailVerify,
         title: title, color: color, pages: pagesUkr, domain: domain
     });
 });
 
 app.use('/trainings', (req, res) => {
     res.render('trainings', {
-        layout: './layouts/regular-layout',
+        layout: './layouts/regular-layout', emailVerify: emailVerify,
         title: title, color: color, pages: pages, domain: domain
     });
 });
 
 app.use('/trainings-ukr', (req, res) => {
     res.render('trainings-ukr', {
-        layout: './layouts/regular-layout-ukr',
+        layout: './layouts/regular-layout-ukr', emailVerify: emailVerify,
         title: title, color: color, pages: pagesUkr, domain: domain
     });
 });

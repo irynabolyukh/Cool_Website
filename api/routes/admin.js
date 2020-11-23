@@ -7,6 +7,7 @@ const config = require('config');
 const title = config.get('App.title');
 const domain = config.get('App.domain');
 const color = config.get('App.color');
+const emailVerify = config.get('App.emailVerify');
 
 const Application = require('../models/application');
 const Training = require('../models/training');
@@ -19,31 +20,48 @@ let transporter = nodemailer.createTransport({
     }
 });
 
-router.use('/send', function (req, res, next){
-    const text = req.body.messageTemplate + '\n' + req.body.myMessage;
-    Application.find().select('mail -_id').exec().then(mails => {
-        let mailOptions = {
-            from: 'netluvflix@gmail.com',
-            to: mails,
-            subject: 'Spam Mailer',
-            text: text
-        };
-        transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-                console.log(error);
-            } else {
-                console.log('Email sent: ' + info.response);
-            }
-        });
-        res.redirect('/admin');
-    }).catch(err => {
-        console.log(err);
-        res.status(500).json({
-            error: err,
-            message: "Cannot send message"
-        });
+function sendMailTo(mail){
+    let mailOptions = {
+        from: 'netluvflix@gmail.com',
+        to: mail,
+        subject: 'Підтвердження заявки',
+        text: "Ваша заявка була прийнята."
+    };
+    transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
     });
-});
+}
+
+
+// router.use('/send', function (req, res, next){
+//     const text = req.body.messageTemplate + '\n' + req.body.myMessage;
+//     Application.find().select('mail -_id').exec().then(mails => {
+//         let mailOptions = {
+//             from: 'netluvflix@gmail.com',
+//             to: mails,
+//             subject: 'Spam Mailer',
+//             text: text
+//         };
+//         transporter.sendMail(mailOptions, function(error, info){
+//             if (error) {
+//                 console.log(error);
+//             } else {
+//                 console.log('Email sent: ' + info.response);
+//             }
+//         });
+//         res.redirect('/admin');
+//     }).catch(err => {
+//         console.log(err);
+//         res.status(500).json({
+//             error: err,
+//             message: "Cannot send message"
+//         });
+//     });
+// });
 
 router.get('/', (req,res,next) => {
     Application.find().exec().then(docs => {
@@ -110,6 +128,7 @@ router.post('/', (req,res,next) => {
 });
 
 router.post('/post', (req,res,next) => {
+    const mailToSendTo = req.body.mail;
     const application = new Application({
         _id: new mongoose.Types.ObjectId(),
         firstName: req.body.firstName,
@@ -121,6 +140,9 @@ router.post('/post', (req,res,next) => {
 
     application.save().then(result => {
         console.log(result);
+        if(emailVerify){
+            sendMailTo(mailToSendTo);
+        }
         res.status(201).redirect('/home');
     }).catch(err => {
         console.log(err);
@@ -131,6 +153,7 @@ router.post('/post', (req,res,next) => {
 });
 
 router.post('/post-ukr', (req,res,next) => {
+    const mailToSendTo = req.body.mail;
     const application = new Application({
         _id: new mongoose.Types.ObjectId(),
         firstName: req.body.firstName,
@@ -142,6 +165,9 @@ router.post('/post-ukr', (req,res,next) => {
 
     application.save().then(result => {
         console.log(result);
+        if(emailVerify){
+            sendMailTo(mailToSendTo);
+        }
         res.status(201).redirect('/home-ukr');
     }).catch(err => {
         console.log(err);

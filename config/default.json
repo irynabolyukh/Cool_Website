@@ -3,6 +3,7 @@
     "title" : "Круті тренінги",
     "domain": "cooltraining.com.ua",
     "color": "#17624D",
+    "emailVerify": true,
     "webServer" : {
       "protocol" : "http",
       "port" : 3000
