@@ -3,6 +3,49 @@ body{
     font-size: 20px;
 }
 
+
+.myBtn {
+    position: fixed;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #80280E;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.myBtn:nth-child(1) {
+    top: 30px;
+    left: 30px;
+}
+
+.myBtn:nth-child(2) {
+    top: 100px;
+    left: 30px;
+}
+
+.myBtn:nth-child(3) {
+    top: 170px;
+    left: 30px;
+}
+
+.myBtn:nth-child(4) {
+    top: 240px;
+    left: 30px;
+}
+
+.myBtn:nth-child(5) {
+    top: 310px;
+    left: 30px;
+}
+
+.myBtn:hover {
+    background-color: #6D230D;
+}
+
 h1{
     color: #17624D;
     font-size: 46px;

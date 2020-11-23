@@ -109,6 +109,27 @@ router.post('/', (req,res,next) => {
     });
 });
 
+router.post('/post', (req,res,next) => {
+    const application = new Application({
+        _id: new mongoose.Types.ObjectId(),
+        firstName: req.body.firstName,
+        surname: req.body.surname,
+        mail: req.body.mail,
+        phoneNum: req.body.phoneNum,
+        applicText: req.body.applicText
+    });
+
+    application.save().then(result => {
+        console.log(result);
+        res.status(201).redirect('/home');
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    });
+});
+
 router.post('/training', (req,res,next) => {
     const training = new Training({
         _id: new mongoose.Types.ObjectId(),
