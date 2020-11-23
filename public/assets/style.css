@@ -95,21 +95,21 @@ a:hover {
     cursor: pointer;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 853px) {
     .en{
         padding-left: 0;
     }
 }
 
-@media (min-width: 721px) {
+@media (max-width: 1349px) {
     .en{
-        padding-left: 30%;
+        padding-left: 10%;
     }
 }
 
-@media (min-width: 988px) {
+@media (min-width: 1350px) {
     .en{
-        padding-left: 50%;
+        padding-left: 40%;
     }
 }
 
