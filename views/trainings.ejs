@@ -16,24 +16,20 @@
             super(props);
             this.state = {
                 posts: [],
-                // showHideFName: true,
-                // showHideLName: true
+                showHideMore: true
             };
-            // this.hideComponent = this.hideComponent.bind(this);
+            this.hideComponent = this.hideComponent.bind(this);
         }
 
-        // hideComponent(name) {
-        //     switch (name) {
-        //         case "showHideFName":
-        //             this.setState({ showHideFName: !this.state.showHideFName });
-        //             break;
-        //         case "showHideLName":
-        //             this.setState({ showHideLName: !this.state.showHideLName });
-        //             break;
-        //         default:
-        //             null;
-        //     }
-        // }
+        hideComponent(name) {
+            switch (name) {
+                case "showHideMore":
+                    this.setState({ showHideMore: !this.state.showHideMore });
+                    break;
+                default:
+                    null;
+            }
+        }
 
         getNewPosts() {
             fetch("/admin/trainings")
@@ -54,7 +50,7 @@
         }
 
         render() {
-            // const { showHideFName, showHideLName } = this.state;
+            const { showHideMore } = this.state;
             if (this.state.posts) {
                 return (
                     <div className="card-body table-responsive">
@@ -62,8 +58,13 @@
                             <div>
                                 <h2 className="">{post.nameT}</h2>
                                 <p className="">{post.descrShort}</p>
-                                <p>{post.descrLong}</p>
-                                <a href={"http://localhost:3000/admin/training/" + post._id}>More</a>
+                                {showHideMore && (
+                                    <p>{post.descrLong}</p>)
+                                    // <a href={"http://localhost:3000/admin/training/" + post._id}>More</a>
+                                }
+                                <a onClick={() => this.hideComponent("showHideMore")}>
+                                    More
+                                </a>
                             </div>)
                         )}
                     </div>
