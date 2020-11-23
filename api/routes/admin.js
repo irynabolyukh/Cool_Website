@@ -36,33 +36,6 @@ function sendMailTo(mail){
     });
 }
 
-
-// router.use('/send', function (req, res, next){
-//     const text = req.body.messageTemplate + '\n' + req.body.myMessage;
-//     Application.find().select('mail -_id').exec().then(mails => {
-//         let mailOptions = {
-//             from: 'netluvflix@gmail.com',
-//             to: mails,
-//             subject: 'Spam Mailer',
-//             text: text
-//         };
-//         transporter.sendMail(mailOptions, function(error, info){
-//             if (error) {
-//                 console.log(error);
-//             } else {
-//                 console.log('Email sent: ' + info.response);
-//             }
-//         });
-//         res.redirect('/admin');
-//     }).catch(err => {
-//         console.log(err);
-//         res.status(500).json({
-//             error: err,
-//             message: "Cannot send message"
-//         });
-//     });
-// });
-
 router.get('/', (req,res,next) => {
     Application.find().exec().then(docs => {
         console.log(docs);

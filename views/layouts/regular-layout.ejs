@@ -25,11 +25,6 @@
         <side><div id="application" class="container shadow-lg p-3 mb-5 bg-white rounded">
                 <h3 class="apply-header">Application Form</h3>
                 <div id="success" class="alert alert-success" role="alert" style="display: none;">
-                    <%if (emailVerify) { %>
-                        <strong>Well done!</strong> Email verification was sent to you!
-                    <% } else{ %>
-                        <strong>Well done!</strong> Our manager will contact you!
-                    <% } %>
                 </div>
                 <form id="formApplication" class="form-application" action="/admin/post" method="POST" onsubmit="return checkInput();">
                     <div class="my-form-control">
@@ -74,21 +69,17 @@
             </div>
         </side>
     </div>
+    <footer class="page-footer font-small cyan darken-3"><%- include('../partials/footer.ejs') %></footer>
     <script>
-        $('#formApplication').submit( function(event) {
-            form = this;
-            event.preventDefault();
-            setTimeout( function () {
-                form.submit();
-            }, 1000);
-        });
 
         function show_alert(emailVerify) {
             if(checkInput() && emailVerify){
+                $("#success").text("Well done! Email verification was sent to you!");
                 $("#success").show();
                 alert("Well done! Email verification was sent to you!");
             }
             else if(checkInput() && !emailVerify){
+                $("#success").text("Well done! Our manager will contact you!");
                 $("#success").show();
                 alert("Well done! Our manager will contact you!");
             }
