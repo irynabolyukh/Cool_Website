@@ -1,0 +1,74 @@
+<form id="formTraining" class="form-training" action="/admin/training" method="POST" onsubmit="return checkInputs();">
+    <div class="my-form-control">
+        <label>Training name</label>
+        <input type="text" placeholder="Name" name="nameT" id="nameT">
+        <i class="fas fa-check-circle"></i>
+        <i class="fas fa-exclamation-circle"></i>
+        <small>Error message</small>
+    </div>
+    <div class="my-form-control">
+        <label>Short Description</label>
+        <textarea type="text" placeholder="Text" name="descrShort" id="descrShort"></textarea>
+        <i class="fas fa-check-circle"></i>
+        <i class="fas fa-exclamation-circle"></i>
+        <small>Error message</small>
+    </div>
+    <div class="my-form-control">
+        <label>Long Description</label>
+        <textarea type="text" placeholder="Text" name="descrLong" id="descrLong"></textarea>
+        <i class="fas fa-check-circle"></i>
+        <i class="fas fa-exclamation-circle"></i>
+        <small>Error message</small>
+    </div>
+    <div class="my-button">
+        <button type="submit" class="btn btn-success btn-lg btn-block">Add Training</button>
+    </div>
+</form>
+
+<script>
+    const nameT = document.getElementById('nameT');
+    const descrShort = document.getElementById('descrShort');
+    const descrLong = document.getElementById('descrLong');
+
+    function checkInputs(){
+        const nameTValue = nameT.value.trim();
+        const descrShortValue = descrShort.value.trim();
+        const descrLongValue = descrLong.value.trim();
+        let isGood = true;
+
+        if(nameTValue === ''){
+            setErrorFor(nameT, "Training name cannot be blank");
+            isGood = false;
+        }else{
+            setSuccessFor(nameT);
+        }
+
+        if(descrShortValue === ''){
+            setErrorFor(descrShort, "Short Description name cannot be blank");
+            isGood = false;
+        }else{
+            setSuccessFor(descrShort);
+        }
+
+        if(descrLongValue === ''){
+            setErrorFor(descrLong, "Long Description name cannot be blank");
+            isGood = false;
+        }else{
+            setSuccessFor(descrLong);
+        }
+
+        return isGood;
+    }
+
+    function setErrorFor(input, message) {
+        const formControl = input.parentElement;
+        const small = formControl.querySelector('small');
+        formControl.className = 'my-form-control error';
+        small.innerText = message;
+    }
+
+    function setSuccessFor(input) {
+        const formControl = input.parentElement;
+        formControl.className = 'my-form-control success';
+    }
+</script>
