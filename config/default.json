@@ -3,6 +3,17 @@
     "title" : "Круті тренінги",
     "domain": "cooltraining.com.ua",
     "color": "#17624D",
+    "image": "screen.PNG",
+    "pages": [
+      {"name": "HOME", "href": "/home"},
+      {"name": "TRAININGS", "href": "/trainings"},
+      {"name": "ABOUT", "href": "/about"}
+    ],
+    "pages-ukr": [
+      {"name": "ГОЛОВНА", "href": "/home-ukr"},
+      {"name": "ТРЕНІНГИ", "href": "/trainings-ukr"},
+      {"name": "ПРО НАС", "href": "/about-ukr"}
+    ],
     "emailVerify": true,
     "webServer" : {
       "protocol" : "http",
