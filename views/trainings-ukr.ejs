@@ -9,24 +9,20 @@
 </div>
 
 <script type="text/babel">
+
+    function toggleMore(id) {
+        let x = document.getElementById(id);
+        $(x).toggle();
+    }
+
     class ShowTrainings extends React.Component {
         constructor(props) {
             super(props);
             this.state = {
-                trainings: [],
-                trainingsFull: false
+                trainings: []
             };
-            this.hideComponent = this.hideComponent.bind(this);
         }
-        hideComponent(name) {
-            switch (name) {
-                case "trainingsFull":
-                    this.setState({ trainingsFull: !this.state.trainingsFull });
-                    break;
-                default:
-                    null;
-            }
-        }
+
         getNewTrainings() {
             fetch("/admin/trainings")
                 .then((resp) => resp.json())
@@ -46,18 +42,15 @@
         }
 
         render() {
-            const { trainingsFull } = this.state;
             if (this.state.trainings) {
                 return (
                     <div className="card-body table-responsive">
                         {this.state.trainings.map((training) => (
                             <div>
-                                <h2 className="">{training.nameT}</h2>
-                                <p className="">{training.descrShort}</p>
-                                {trainingsFull && (
-                                    <p>{training.descrLong}</p>)
-                                }
-                                <p id="showMore" onClick={() => this.hideComponent("trainingsFull")}>
+                                <h2>{training.nameT}</h2>
+                                <p>{training.descrShort}</p>
+                                <p className="description" id={training._id}>{training.descrLong}</p>
+                                <p id="showMore" onClick={() => toggleMore(training._id)}>
                                     Детальніше
                                 </p>
                             </div>)

@@ -135,6 +135,10 @@ a:hover {
     border: 5px solid #17624D;
 }
 
+.description{
+    display: none;
+}
+
 .my-form-control{
     margin-bottom: 10px;
     padding-bottom: 20px;
