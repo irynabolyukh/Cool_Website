@@ -15,14 +15,14 @@ const Training = require('../models/training');
 let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'netluvflix@gmail.com',
-        pass: 'netluvflix123'
+        user: '-@gmail.com',
+        pass: '-'
     }
 });
 
 function sendMailTo(mail){
     let mailOptions = {
-        from: 'netluvflix@gmail.com',
+        from: '-@gmail.com',
         to: mail,
         subject: 'Підтвердження заявки',
         text: "Ваша заявка була прийнята."
